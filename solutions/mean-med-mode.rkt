@@ -4,14 +4,20 @@
 (define (meanlist lis)
   (/ (sumlist lis) (length lis)))
 
-; median implementation
+; median implementation with recursion
 (define (medianlist lis)
-  (sort lis <)
-  (if (even? (length lis))
-      (/ (+ (list-ref lis (/ (length lis) 2)) (list-ref lis (- (/ (length lis) 2) 1))) 2)
-      (list-ref lis (+ (quotient (length lis) 2)))))
+  (define sorted-list (sort lis <))
+  (if (equal? (length sorted-list) 2)
+      (/ (sumlist sorted-list) 2)
+      (if (equal? (length sorted-list) 1)
+          (sumlist sorted-list)
+          (trimlist sorted-list))))
 
-; mode implementation
+; helper function to take off first and last number in list
+(define (trimlist lis)
+  (medianlist (cdr (sort (cdr lis) >))))
+
+; mode implementation with recursion
 (define (modelist lis)
   ; function to count times an element appears
   (define (countelement elem lis)

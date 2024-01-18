@@ -6,6 +6,7 @@
 
 ; median implementation
 (define (medianlist lis)
+  (sort lis <)
   (if (even? (length lis))
       (/ (+ (list-ref lis (/ (length lis) 2)) (list-ref lis (- (/ (length lis) 2) 1))) 2)
       (list-ref lis (+ (quotient (length lis) 2)))))
@@ -24,7 +25,21 @@
   (define (findmode lis currmode currfreq)
     (if (null? lis)
         currmode
-        
+        (let* ([head (car lis)] ; temporary assignments
+              [tail (cdr lis)]
+              [count (countelement head tail)])
+         (cond
+           [(> count currfreq)
+            (findmode tail head count)]
+           [else
+            (findmode tail currmode currfreq)]))))
+  ; base case
+  (if (null? lis)
+      #f
+      (let* ([head (car lis)]
+            [tail (cdr lis)]
+            [count (countelement head tail)])
+       (findmode tail head count))))
       
       
        
