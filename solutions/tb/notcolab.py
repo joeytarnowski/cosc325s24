@@ -189,5 +189,5 @@ program(lexer.token())
 
 # by this point, statements should be fully populated
 for stmt in statements:
-  print(f"Executing {stmt} at line # {stmt._linenumber}")
+  print(f"#{stmt._linenumber}: {stmt}")
   stmt.execute()
