@@ -1,0 +1,1303 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> actual_statement
+Rule 2     program -> program actual_statement
+Rule 3     actual_statement -> NUMBER statement NEWLINE
+Rule 4     statement -> print_statement
+Rule 5     statement -> input_statement
+Rule 6     statement -> if_statement
+Rule 7     statement -> goto_statement
+Rule 8     statement -> let_statement
+Rule 9     statement -> gosub_statement
+Rule 10    statement -> rem_statement
+Rule 11    statement -> return_statement
+Rule 12    statement -> end_statement
+Rule 13    print_statement -> PRINT expr_list
+Rule 14    input_statement -> INPUT var_list
+Rule 15    if_statement -> IF expression RELOP expression THEN statement
+Rule 16    goto_statement -> GOTO expression
+Rule 17    let_statement -> LET VAR EQUALS expression
+Rule 18    gosub_statement -> GOSUB expression
+Rule 19    rem_statement -> REM
+Rule 20    return_statement -> RETURN
+Rule 21    end_statement -> END
+Rule 22    expr_list -> expr_list_item
+Rule 23    expr_list -> expr_list COMMA expr_list_item
+Rule 24    expr_list -> expr_list SEMICOLON expr_list_item
+Rule 25    expr_list_item -> expression
+Rule 26    expr_list_item -> STRING
+Rule 27    var_list -> VAR
+Rule 28    var_list -> var_list COMMA VAR
+Rule 29    expression -> term
+Rule 30    expression -> expression PLUS term
+Rule 31    expression -> expression MINUS term
+Rule 32    term -> factor
+Rule 33    term -> term TIMES factor
+Rule 34    term -> term DIVIDE factor
+Rule 35    factor -> VAR
+Rule 36    factor -> NUMBER
+Rule 37    factor -> LPAREN expression RPAREN
+Rule 38    factor -> PLUS factor
+Rule 39    factor -> MINUS factor
+Rule 40    factor -> function
+Rule 41    function -> RND LPAREN expr_list RPAREN
+Rule 42    function -> USR LPAREN expr_list RPAREN
+
+Terminals, with rules where they appear
+
+COMMA                : 23 28
+DIVIDE               : 34
+END                  : 21
+EQUALS               : 17
+GOSUB                : 18
+GOTO                 : 16
+IF                   : 15
+INPUT                : 14
+LET                  : 17
+LPAREN               : 37 41 42
+MINUS                : 31 39
+NEWLINE              : 3
+NUMBER               : 3 36
+PLUS                 : 30 38
+PRINT                : 13
+RELOP                : 15
+REM                  : 19
+RETURN               : 20
+RND                  : 41
+RPAREN               : 37 41 42
+SEMICOLON            : 24
+STRING               : 26
+THEN                 : 15
+TIMES                : 33
+USR                  : 42
+VAR                  : 17 27 28 35
+error                : 
+
+Nonterminals, with rules where they appear
+
+actual_statement     : 1 2
+end_statement        : 12
+expr_list            : 13 23 24 41 42
+expr_list_item       : 22 23 24
+expression           : 15 15 16 17 18 25 30 31 37
+factor               : 32 33 34 38 39
+function             : 40
+gosub_statement      : 9
+goto_statement       : 7
+if_statement         : 6
+input_statement      : 5
+let_statement        : 8
+print_statement      : 4
+program              : 2 0
+rem_statement        : 10
+return_statement     : 11
+statement            : 3 15
+term                 : 29 30 31 33 34
+var_list             : 14 28
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . actual_statement
+    (2) program -> . program actual_statement
+    (3) actual_statement -> . NUMBER statement NEWLINE
+
+    NUMBER          shift and go to state 3
+
+    program                        shift and go to state 1
+    actual_statement               shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+    (2) program -> program . actual_statement
+    (3) actual_statement -> . NUMBER statement NEWLINE
+
+    NUMBER          shift and go to state 3
+
+    actual_statement               shift and go to state 4
+
+state 2
+
+    (1) program -> actual_statement .
+
+    NUMBER          reduce using rule 1 (program -> actual_statement .)
+    $end            reduce using rule 1 (program -> actual_statement .)
+
+
+state 3
+
+    (3) actual_statement -> NUMBER . statement NEWLINE
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . if_statement
+    (7) statement -> . goto_statement
+    (8) statement -> . let_statement
+    (9) statement -> . gosub_statement
+    (10) statement -> . rem_statement
+    (11) statement -> . return_statement
+    (12) statement -> . end_statement
+    (13) print_statement -> . PRINT expr_list
+    (14) input_statement -> . INPUT var_list
+    (15) if_statement -> . IF expression RELOP expression THEN statement
+    (16) goto_statement -> . GOTO expression
+    (17) let_statement -> . LET VAR EQUALS expression
+    (18) gosub_statement -> . GOSUB expression
+    (19) rem_statement -> . REM
+    (20) return_statement -> . RETURN
+    (21) end_statement -> . END
+
+    PRINT           shift and go to state 15
+    INPUT           shift and go to state 16
+    IF              shift and go to state 17
+    GOTO            shift and go to state 18
+    LET             shift and go to state 19
+    GOSUB           shift and go to state 20
+    REM             shift and go to state 21
+    RETURN          shift and go to state 22
+    END             shift and go to state 23
+
+    statement                      shift and go to state 5
+    print_statement                shift and go to state 6
+    input_statement                shift and go to state 7
+    if_statement                   shift and go to state 8
+    goto_statement                 shift and go to state 9
+    let_statement                  shift and go to state 10
+    gosub_statement                shift and go to state 11
+    rem_statement                  shift and go to state 12
+    return_statement               shift and go to state 13
+    end_statement                  shift and go to state 14
+
+state 4
+
+    (2) program -> program actual_statement .
+
+    NUMBER          reduce using rule 2 (program -> program actual_statement .)
+    $end            reduce using rule 2 (program -> program actual_statement .)
+
+
+state 5
+
+    (3) actual_statement -> NUMBER statement . NEWLINE
+
+    NEWLINE         shift and go to state 24
+
+
+state 6
+
+    (4) statement -> print_statement .
+
+    NEWLINE         reduce using rule 4 (statement -> print_statement .)
+
+
+state 7
+
+    (5) statement -> input_statement .
+
+    NEWLINE         reduce using rule 5 (statement -> input_statement .)
+
+
+state 8
+
+    (6) statement -> if_statement .
+
+    NEWLINE         reduce using rule 6 (statement -> if_statement .)
+
+
+state 9
+
+    (7) statement -> goto_statement .
+
+    NEWLINE         reduce using rule 7 (statement -> goto_statement .)
+
+
+state 10
+
+    (8) statement -> let_statement .
+
+    NEWLINE         reduce using rule 8 (statement -> let_statement .)
+
+
+state 11
+
+    (9) statement -> gosub_statement .
+
+    NEWLINE         reduce using rule 9 (statement -> gosub_statement .)
+
+
+state 12
+
+    (10) statement -> rem_statement .
+
+    NEWLINE         reduce using rule 10 (statement -> rem_statement .)
+
+
+state 13
+
+    (11) statement -> return_statement .
+
+    NEWLINE         reduce using rule 11 (statement -> return_statement .)
+
+
+state 14
+
+    (12) statement -> end_statement .
+
+    NEWLINE         reduce using rule 12 (statement -> end_statement .)
+
+
+state 15
+
+    (13) print_statement -> PRINT . expr_list
+    (22) expr_list -> . expr_list_item
+    (23) expr_list -> . expr_list COMMA expr_list_item
+    (24) expr_list -> . expr_list SEMICOLON expr_list_item
+    (25) expr_list_item -> . expression
+    (26) expr_list_item -> . STRING
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    STRING          shift and go to state 28
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expr_list                      shift and go to state 25
+    expr_list_item                 shift and go to state 26
+    expression                     shift and go to state 27
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 16
+
+    (14) input_statement -> INPUT . var_list
+    (27) var_list -> . VAR
+    (28) var_list -> . var_list COMMA VAR
+
+    VAR             shift and go to state 40
+
+    var_list                       shift and go to state 39
+
+state 17
+
+    (15) if_statement -> IF . expression RELOP expression THEN statement
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expression                     shift and go to state 41
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 18
+
+    (16) goto_statement -> GOTO . expression
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expression                     shift and go to state 42
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 19
+
+    (17) let_statement -> LET . VAR EQUALS expression
+
+    VAR             shift and go to state 43
+
+
+state 20
+
+    (18) gosub_statement -> GOSUB . expression
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expression                     shift and go to state 44
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 21
+
+    (19) rem_statement -> REM .
+
+    NEWLINE         reduce using rule 19 (rem_statement -> REM .)
+
+
+state 22
+
+    (20) return_statement -> RETURN .
+
+    NEWLINE         reduce using rule 20 (return_statement -> RETURN .)
+
+
+state 23
+
+    (21) end_statement -> END .
+
+    NEWLINE         reduce using rule 21 (end_statement -> END .)
+
+
+state 24
+
+    (3) actual_statement -> NUMBER statement NEWLINE .
+
+    NUMBER          reduce using rule 3 (actual_statement -> NUMBER statement NEWLINE .)
+    $end            reduce using rule 3 (actual_statement -> NUMBER statement NEWLINE .)
+
+
+state 25
+
+    (13) print_statement -> PRINT expr_list .
+    (23) expr_list -> expr_list . COMMA expr_list_item
+    (24) expr_list -> expr_list . SEMICOLON expr_list_item
+
+    NEWLINE         reduce using rule 13 (print_statement -> PRINT expr_list .)
+    COMMA           shift and go to state 45
+    SEMICOLON       shift and go to state 46
+
+
+state 26
+
+    (22) expr_list -> expr_list_item .
+
+    COMMA           reduce using rule 22 (expr_list -> expr_list_item .)
+    SEMICOLON       reduce using rule 22 (expr_list -> expr_list_item .)
+    NEWLINE         reduce using rule 22 (expr_list -> expr_list_item .)
+    RPAREN          reduce using rule 22 (expr_list -> expr_list_item .)
+
+
+state 27
+
+    (25) expr_list_item -> expression .
+    (30) expression -> expression . PLUS term
+    (31) expression -> expression . MINUS term
+
+    COMMA           reduce using rule 25 (expr_list_item -> expression .)
+    SEMICOLON       reduce using rule 25 (expr_list_item -> expression .)
+    NEWLINE         reduce using rule 25 (expr_list_item -> expression .)
+    RPAREN          reduce using rule 25 (expr_list_item -> expression .)
+    PLUS            shift and go to state 47
+    MINUS           shift and go to state 48
+
+
+state 28
+
+    (26) expr_list_item -> STRING .
+
+    COMMA           reduce using rule 26 (expr_list_item -> STRING .)
+    SEMICOLON       reduce using rule 26 (expr_list_item -> STRING .)
+    NEWLINE         reduce using rule 26 (expr_list_item -> STRING .)
+    RPAREN          reduce using rule 26 (expr_list_item -> STRING .)
+
+
+state 29
+
+    (29) expression -> term .
+    (33) term -> term . TIMES factor
+    (34) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 29 (expression -> term .)
+    MINUS           reduce using rule 29 (expression -> term .)
+    COMMA           reduce using rule 29 (expression -> term .)
+    SEMICOLON       reduce using rule 29 (expression -> term .)
+    NEWLINE         reduce using rule 29 (expression -> term .)
+    RELOP           reduce using rule 29 (expression -> term .)
+    RPAREN          reduce using rule 29 (expression -> term .)
+    THEN            reduce using rule 29 (expression -> term .)
+    TIMES           shift and go to state 49
+    DIVIDE          shift and go to state 50
+
+
+state 30
+
+    (38) factor -> PLUS . factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    factor                         shift and go to state 51
+    function                       shift and go to state 36
+
+state 31
+
+    (39) factor -> MINUS . factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    factor                         shift and go to state 52
+    function                       shift and go to state 36
+
+state 32
+
+    (32) term -> factor .
+
+    TIMES           reduce using rule 32 (term -> factor .)
+    DIVIDE          reduce using rule 32 (term -> factor .)
+    PLUS            reduce using rule 32 (term -> factor .)
+    MINUS           reduce using rule 32 (term -> factor .)
+    COMMA           reduce using rule 32 (term -> factor .)
+    SEMICOLON       reduce using rule 32 (term -> factor .)
+    NEWLINE         reduce using rule 32 (term -> factor .)
+    RELOP           reduce using rule 32 (term -> factor .)
+    RPAREN          reduce using rule 32 (term -> factor .)
+    THEN            reduce using rule 32 (term -> factor .)
+
+
+state 33
+
+    (35) factor -> VAR .
+
+    TIMES           reduce using rule 35 (factor -> VAR .)
+    DIVIDE          reduce using rule 35 (factor -> VAR .)
+    PLUS            reduce using rule 35 (factor -> VAR .)
+    MINUS           reduce using rule 35 (factor -> VAR .)
+    COMMA           reduce using rule 35 (factor -> VAR .)
+    SEMICOLON       reduce using rule 35 (factor -> VAR .)
+    NEWLINE         reduce using rule 35 (factor -> VAR .)
+    RELOP           reduce using rule 35 (factor -> VAR .)
+    RPAREN          reduce using rule 35 (factor -> VAR .)
+    THEN            reduce using rule 35 (factor -> VAR .)
+
+
+state 34
+
+    (36) factor -> NUMBER .
+
+    TIMES           reduce using rule 36 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 36 (factor -> NUMBER .)
+    PLUS            reduce using rule 36 (factor -> NUMBER .)
+    MINUS           reduce using rule 36 (factor -> NUMBER .)
+    COMMA           reduce using rule 36 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 36 (factor -> NUMBER .)
+    NEWLINE         reduce using rule 36 (factor -> NUMBER .)
+    RELOP           reduce using rule 36 (factor -> NUMBER .)
+    RPAREN          reduce using rule 36 (factor -> NUMBER .)
+    THEN            reduce using rule 36 (factor -> NUMBER .)
+
+
+state 35
+
+    (37) factor -> LPAREN . expression RPAREN
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expression                     shift and go to state 53
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 36
+
+    (40) factor -> function .
+
+    TIMES           reduce using rule 40 (factor -> function .)
+    DIVIDE          reduce using rule 40 (factor -> function .)
+    PLUS            reduce using rule 40 (factor -> function .)
+    MINUS           reduce using rule 40 (factor -> function .)
+    COMMA           reduce using rule 40 (factor -> function .)
+    SEMICOLON       reduce using rule 40 (factor -> function .)
+    NEWLINE         reduce using rule 40 (factor -> function .)
+    RELOP           reduce using rule 40 (factor -> function .)
+    RPAREN          reduce using rule 40 (factor -> function .)
+    THEN            reduce using rule 40 (factor -> function .)
+
+
+state 37
+
+    (41) function -> RND . LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 54
+
+
+state 38
+
+    (42) function -> USR . LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 55
+
+
+state 39
+
+    (14) input_statement -> INPUT var_list .
+    (28) var_list -> var_list . COMMA VAR
+
+    NEWLINE         reduce using rule 14 (input_statement -> INPUT var_list .)
+    COMMA           shift and go to state 56
+
+
+state 40
+
+    (27) var_list -> VAR .
+
+    COMMA           reduce using rule 27 (var_list -> VAR .)
+    NEWLINE         reduce using rule 27 (var_list -> VAR .)
+
+
+state 41
+
+    (15) if_statement -> IF expression . RELOP expression THEN statement
+    (30) expression -> expression . PLUS term
+    (31) expression -> expression . MINUS term
+
+    RELOP           shift and go to state 57
+    PLUS            shift and go to state 47
+    MINUS           shift and go to state 48
+
+
+state 42
+
+    (16) goto_statement -> GOTO expression .
+    (30) expression -> expression . PLUS term
+    (31) expression -> expression . MINUS term
+
+    NEWLINE         reduce using rule 16 (goto_statement -> GOTO expression .)
+    PLUS            shift and go to state 47
+    MINUS           shift and go to state 48
+
+
+state 43
+
+    (17) let_statement -> LET VAR . EQUALS expression
+
+    EQUALS          shift and go to state 58
+
+
+state 44
+
+    (18) gosub_statement -> GOSUB expression .
+    (30) expression -> expression . PLUS term
+    (31) expression -> expression . MINUS term
+
+    NEWLINE         reduce using rule 18 (gosub_statement -> GOSUB expression .)
+    PLUS            shift and go to state 47
+    MINUS           shift and go to state 48
+
+
+state 45
+
+    (23) expr_list -> expr_list COMMA . expr_list_item
+    (25) expr_list_item -> . expression
+    (26) expr_list_item -> . STRING
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    STRING          shift and go to state 28
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expr_list_item                 shift and go to state 59
+    expression                     shift and go to state 27
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 46
+
+    (24) expr_list -> expr_list SEMICOLON . expr_list_item
+    (25) expr_list_item -> . expression
+    (26) expr_list_item -> . STRING
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    STRING          shift and go to state 28
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expr_list_item                 shift and go to state 60
+    expression                     shift and go to state 27
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 47
+
+    (30) expression -> expression PLUS . term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    term                           shift and go to state 61
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 48
+
+    (31) expression -> expression MINUS . term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    term                           shift and go to state 62
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 49
+
+    (33) term -> term TIMES . factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    factor                         shift and go to state 63
+    function                       shift and go to state 36
+
+state 50
+
+    (34) term -> term DIVIDE . factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    factor                         shift and go to state 64
+    function                       shift and go to state 36
+
+state 51
+
+    (38) factor -> PLUS factor .
+
+    TIMES           reduce using rule 38 (factor -> PLUS factor .)
+    DIVIDE          reduce using rule 38 (factor -> PLUS factor .)
+    PLUS            reduce using rule 38 (factor -> PLUS factor .)
+    MINUS           reduce using rule 38 (factor -> PLUS factor .)
+    COMMA           reduce using rule 38 (factor -> PLUS factor .)
+    SEMICOLON       reduce using rule 38 (factor -> PLUS factor .)
+    NEWLINE         reduce using rule 38 (factor -> PLUS factor .)
+    RELOP           reduce using rule 38 (factor -> PLUS factor .)
+    RPAREN          reduce using rule 38 (factor -> PLUS factor .)
+    THEN            reduce using rule 38 (factor -> PLUS factor .)
+
+
+state 52
+
+    (39) factor -> MINUS factor .
+
+    TIMES           reduce using rule 39 (factor -> MINUS factor .)
+    DIVIDE          reduce using rule 39 (factor -> MINUS factor .)
+    PLUS            reduce using rule 39 (factor -> MINUS factor .)
+    MINUS           reduce using rule 39 (factor -> MINUS factor .)
+    COMMA           reduce using rule 39 (factor -> MINUS factor .)
+    SEMICOLON       reduce using rule 39 (factor -> MINUS factor .)
+    NEWLINE         reduce using rule 39 (factor -> MINUS factor .)
+    RELOP           reduce using rule 39 (factor -> MINUS factor .)
+    RPAREN          reduce using rule 39 (factor -> MINUS factor .)
+    THEN            reduce using rule 39 (factor -> MINUS factor .)
+
+
+state 53
+
+    (37) factor -> LPAREN expression . RPAREN
+    (30) expression -> expression . PLUS term
+    (31) expression -> expression . MINUS term
+
+    RPAREN          shift and go to state 65
+    PLUS            shift and go to state 47
+    MINUS           shift and go to state 48
+
+
+state 54
+
+    (41) function -> RND LPAREN . expr_list RPAREN
+    (22) expr_list -> . expr_list_item
+    (23) expr_list -> . expr_list COMMA expr_list_item
+    (24) expr_list -> . expr_list SEMICOLON expr_list_item
+    (25) expr_list_item -> . expression
+    (26) expr_list_item -> . STRING
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    STRING          shift and go to state 28
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expr_list                      shift and go to state 66
+    expr_list_item                 shift and go to state 26
+    expression                     shift and go to state 27
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 55
+
+    (42) function -> USR LPAREN . expr_list RPAREN
+    (22) expr_list -> . expr_list_item
+    (23) expr_list -> . expr_list COMMA expr_list_item
+    (24) expr_list -> . expr_list SEMICOLON expr_list_item
+    (25) expr_list_item -> . expression
+    (26) expr_list_item -> . STRING
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    STRING          shift and go to state 28
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expr_list                      shift and go to state 67
+    expr_list_item                 shift and go to state 26
+    expression                     shift and go to state 27
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 56
+
+    (28) var_list -> var_list COMMA . VAR
+
+    VAR             shift and go to state 68
+
+
+state 57
+
+    (15) if_statement -> IF expression RELOP . expression THEN statement
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expression                     shift and go to state 69
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 58
+
+    (17) let_statement -> LET VAR EQUALS . expression
+    (29) expression -> . term
+    (30) expression -> . expression PLUS term
+    (31) expression -> . expression MINUS term
+    (32) term -> . factor
+    (33) term -> . term TIMES factor
+    (34) term -> . term DIVIDE factor
+    (35) factor -> . VAR
+    (36) factor -> . NUMBER
+    (37) factor -> . LPAREN expression RPAREN
+    (38) factor -> . PLUS factor
+    (39) factor -> . MINUS factor
+    (40) factor -> . function
+    (41) function -> . RND LPAREN expr_list RPAREN
+    (42) function -> . USR LPAREN expr_list RPAREN
+
+    VAR             shift and go to state 33
+    NUMBER          shift and go to state 34
+    LPAREN          shift and go to state 35
+    PLUS            shift and go to state 30
+    MINUS           shift and go to state 31
+    RND             shift and go to state 37
+    USR             shift and go to state 38
+
+    expression                     shift and go to state 70
+    term                           shift and go to state 29
+    factor                         shift and go to state 32
+    function                       shift and go to state 36
+
+state 59
+
+    (23) expr_list -> expr_list COMMA expr_list_item .
+
+    COMMA           reduce using rule 23 (expr_list -> expr_list COMMA expr_list_item .)
+    SEMICOLON       reduce using rule 23 (expr_list -> expr_list COMMA expr_list_item .)
+    NEWLINE         reduce using rule 23 (expr_list -> expr_list COMMA expr_list_item .)
+    RPAREN          reduce using rule 23 (expr_list -> expr_list COMMA expr_list_item .)
+
+
+state 60
+
+    (24) expr_list -> expr_list SEMICOLON expr_list_item .
+
+    COMMA           reduce using rule 24 (expr_list -> expr_list SEMICOLON expr_list_item .)
+    SEMICOLON       reduce using rule 24 (expr_list -> expr_list SEMICOLON expr_list_item .)
+    NEWLINE         reduce using rule 24 (expr_list -> expr_list SEMICOLON expr_list_item .)
+    RPAREN          reduce using rule 24 (expr_list -> expr_list SEMICOLON expr_list_item .)
+
+
+state 61
+
+    (30) expression -> expression PLUS term .
+    (33) term -> term . TIMES factor
+    (34) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 30 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 30 (expression -> expression PLUS term .)
+    COMMA           reduce using rule 30 (expression -> expression PLUS term .)
+    SEMICOLON       reduce using rule 30 (expression -> expression PLUS term .)
+    NEWLINE         reduce using rule 30 (expression -> expression PLUS term .)
+    RELOP           reduce using rule 30 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 30 (expression -> expression PLUS term .)
+    THEN            reduce using rule 30 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 49
+    DIVIDE          shift and go to state 50
+
+
+state 62
+
+    (31) expression -> expression MINUS term .
+    (33) term -> term . TIMES factor
+    (34) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 31 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 31 (expression -> expression MINUS term .)
+    COMMA           reduce using rule 31 (expression -> expression MINUS term .)
+    SEMICOLON       reduce using rule 31 (expression -> expression MINUS term .)
+    NEWLINE         reduce using rule 31 (expression -> expression MINUS term .)
+    RELOP           reduce using rule 31 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 31 (expression -> expression MINUS term .)
+    THEN            reduce using rule 31 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 49
+    DIVIDE          shift and go to state 50
+
+
+state 63
+
+    (33) term -> term TIMES factor .
+
+    TIMES           reduce using rule 33 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 33 (term -> term TIMES factor .)
+    PLUS            reduce using rule 33 (term -> term TIMES factor .)
+    MINUS           reduce using rule 33 (term -> term TIMES factor .)
+    COMMA           reduce using rule 33 (term -> term TIMES factor .)
+    SEMICOLON       reduce using rule 33 (term -> term TIMES factor .)
+    NEWLINE         reduce using rule 33 (term -> term TIMES factor .)
+    RELOP           reduce using rule 33 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 33 (term -> term TIMES factor .)
+    THEN            reduce using rule 33 (term -> term TIMES factor .)
+
+
+state 64
+
+    (34) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 34 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 34 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 34 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 34 (term -> term DIVIDE factor .)
+    COMMA           reduce using rule 34 (term -> term DIVIDE factor .)
+    SEMICOLON       reduce using rule 34 (term -> term DIVIDE factor .)
+    NEWLINE         reduce using rule 34 (term -> term DIVIDE factor .)
+    RELOP           reduce using rule 34 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 34 (term -> term DIVIDE factor .)
+    THEN            reduce using rule 34 (term -> term DIVIDE factor .)
+
+
+state 65
+
+    (37) factor -> LPAREN expression RPAREN .
+
+    TIMES           reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+    NEWLINE         reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+    RELOP           reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+    THEN            reduce using rule 37 (factor -> LPAREN expression RPAREN .)
+
+
+state 66
+
+    (41) function -> RND LPAREN expr_list . RPAREN
+    (23) expr_list -> expr_list . COMMA expr_list_item
+    (24) expr_list -> expr_list . SEMICOLON expr_list_item
+
+    RPAREN          shift and go to state 71
+    COMMA           shift and go to state 45
+    SEMICOLON       shift and go to state 46
+
+
+state 67
+
+    (42) function -> USR LPAREN expr_list . RPAREN
+    (23) expr_list -> expr_list . COMMA expr_list_item
+    (24) expr_list -> expr_list . SEMICOLON expr_list_item
+
+    RPAREN          shift and go to state 72
+    COMMA           shift and go to state 45
+    SEMICOLON       shift and go to state 46
+
+
+state 68
+
+    (28) var_list -> var_list COMMA VAR .
+
+    COMMA           reduce using rule 28 (var_list -> var_list COMMA VAR .)
+    NEWLINE         reduce using rule 28 (var_list -> var_list COMMA VAR .)
+
+
+state 69
+
+    (15) if_statement -> IF expression RELOP expression . THEN statement
+    (30) expression -> expression . PLUS term
+    (31) expression -> expression . MINUS term
+
+    THEN            shift and go to state 73
+    PLUS            shift and go to state 47
+    MINUS           shift and go to state 48
+
+
+state 70
+
+    (17) let_statement -> LET VAR EQUALS expression .
+    (30) expression -> expression . PLUS term
+    (31) expression -> expression . MINUS term
+
+    NEWLINE         reduce using rule 17 (let_statement -> LET VAR EQUALS expression .)
+    PLUS            shift and go to state 47
+    MINUS           shift and go to state 48
+
+
+state 71
+
+    (41) function -> RND LPAREN expr_list RPAREN .
+
+    TIMES           reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+    DIVIDE          reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+    PLUS            reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+    MINUS           reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+    COMMA           reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+    SEMICOLON       reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+    NEWLINE         reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+    RELOP           reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+    RPAREN          reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+    THEN            reduce using rule 41 (function -> RND LPAREN expr_list RPAREN .)
+
+
+state 72
+
+    (42) function -> USR LPAREN expr_list RPAREN .
+
+    TIMES           reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+    DIVIDE          reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+    PLUS            reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+    MINUS           reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+    COMMA           reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+    SEMICOLON       reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+    NEWLINE         reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+    RELOP           reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+    RPAREN          reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+    THEN            reduce using rule 42 (function -> USR LPAREN expr_list RPAREN .)
+
+
+state 73
+
+    (15) if_statement -> IF expression RELOP expression THEN . statement
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . if_statement
+    (7) statement -> . goto_statement
+    (8) statement -> . let_statement
+    (9) statement -> . gosub_statement
+    (10) statement -> . rem_statement
+    (11) statement -> . return_statement
+    (12) statement -> . end_statement
+    (13) print_statement -> . PRINT expr_list
+    (14) input_statement -> . INPUT var_list
+    (15) if_statement -> . IF expression RELOP expression THEN statement
+    (16) goto_statement -> . GOTO expression
+    (17) let_statement -> . LET VAR EQUALS expression
+    (18) gosub_statement -> . GOSUB expression
+    (19) rem_statement -> . REM
+    (20) return_statement -> . RETURN
+    (21) end_statement -> . END
+
+    PRINT           shift and go to state 15
+    INPUT           shift and go to state 16
+    IF              shift and go to state 17
+    GOTO            shift and go to state 18
+    LET             shift and go to state 19
+    GOSUB           shift and go to state 20
+    REM             shift and go to state 21
+    RETURN          shift and go to state 22
+    END             shift and go to state 23
+
+    statement                      shift and go to state 74
+    print_statement                shift and go to state 6
+    input_statement                shift and go to state 7
+    if_statement                   shift and go to state 8
+    goto_statement                 shift and go to state 9
+    let_statement                  shift and go to state 10
+    gosub_statement                shift and go to state 11
+    rem_statement                  shift and go to state 12
+    return_statement               shift and go to state 13
+    end_statement                  shift and go to state 14
+
+state 74
+
+    (15) if_statement -> IF expression RELOP expression THEN statement .
+
+    NEWLINE         reduce using rule 15 (if_statement -> IF expression RELOP expression THEN statement .)
+
