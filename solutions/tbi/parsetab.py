@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'COMMA DIVIDE END EQUALS GOSUB GOTO IF INPUT LET LPAREN MINUS NEWLINE NUMBER PLUS PRINT RELOP REM RETURN RND RPAREN SEMICOLON STRING THEN TIMES USR VARprogram : actual_statement\n               | program actual_statementactual_statement : NUMBER statement NEWLINEstatement : print_statement\n                 | input_statement\n                 | if_statement\n                 | goto_statement\n                 | let_statement\n                 | gosub_statement\n                 | rem_statement\n                 | return_statement\n                 | end_statementprint_statement : PRINT expr_listinput_statement : INPUT var_listif_statement : IF expression RELOP expression THEN statementgoto_statement : GOTO expressionlet_statement : LET VAR EQUALS expressiongosub_statement : GOSUB expressionrem_statement : REMreturn_statement : RETURNend_statement : ENDexpr_list : expr_list_item\n                 | expr_list COMMA expr_list_item\n                 | expr_list SEMICOLON expr_list_itemexpr_list_item : expression\n                      | STRINGvar_list : VAR\n                | var_list COMMA VARexpression : term\n                  | expression PLUS term\n                  | expression MINUS termterm : factor\n            | term TIMES factor\n            | term DIVIDE factorfactor : VAR\n              | NUMBER\n              | LPAREN expression RPAREN\n              | PLUS factor \n              | MINUS factor\n              | functionfunction : RND LPAREN expr_list RPAREN\n                | USR LPAREN expr_list RPAREN'
+_lr_signature = 'COMMA DIVIDE END EQUALS GOSUB GOTO IF INPUT LET LPAREN MINUS NEWLINE NUMBER PLUS PRINT RELOP REM RETURN RND RPAREN SEMICOLON STRING THEN TIMES USR VARprogram : actual_statement\n               | program actual_statementactual_statement : NUMBER statement NEWLINEstatement : print_statement \n                 | input_statement\n                 | if_statement\n                 | goto_statement\n                 | let_statement\n                 | gosub_statement\n                 | rem_statement\n                 | return_statement\n                 | end_statementprint_statement : PRINT expr_listinput_statement : INPUT var_listif_statement : IF expression RELOP expression THEN statement\n                    | IF expression EQUALS expression THEN statementgoto_statement : GOTO expressionlet_statement : LET VAR EQUALS expressiongosub_statement : GOSUB expressionrem_statement : REMreturn_statement : RETURNend_statement : ENDexpr_list : expr_list_item\n                 | expr_list COMMA expr_list_item\n                 | expr_list SEMICOLON expr_list_itemexpr_list_item : expression\n                      | STRINGvar_list : VAR\n                | var_list COMMA VARexpression : term\n                  | expression PLUS term\n                  | expression MINUS termterm : factor\n            | term TIMES factor\n            | term DIVIDE factorfactor : VAR\n              | NUMBER\n              | LPAREN expression RPAREN\n              | PLUS factor \n              | MINUS factor\n              | functionfunction : RND LPAREN expr_list RPAREN\n                | USR LPAREN expr_list RPAREN'
     
-_lr_action_items = {'NUMBER':([0,1,2,4,15,17,18,20,24,30,31,35,45,46,47,48,49,50,54,55,57,58,],[3,3,-1,-2,34,34,34,34,-3,34,34,34,34,34,34,34,34,34,34,34,34,34,]),'$end':([1,2,4,24,],[0,-1,-2,-3,]),'PRINT':([3,73,],[15,15,]),'INPUT':([3,73,],[16,16,]),'IF':([3,73,],[17,17,]),'GOTO':([3,73,],[18,18,]),'LET':([3,73,],[19,19,]),'GOSUB':([3,73,],[20,20,]),'REM':([3,73,],[21,21,]),'RETURN':([3,73,],[22,22,]),'END':([3,73,],[23,23,]),'NEWLINE':([5,6,7,8,9,10,11,12,13,14,21,22,23,25,26,27,28,29,32,33,34,36,39,40,42,44,51,52,59,60,61,62,63,64,65,68,70,71,72,74,],[24,-4,-5,-6,-7,-8,-9,-10,-11,-12,-19,-20,-21,-13,-22,-25,-26,-29,-32,-35,-36,-40,-14,-27,-16,-18,-38,-39,-23,-24,-30,-31,-33,-34,-37,-28,-17,-41,-42,-15,]),'STRING':([15,45,46,54,55,],[28,28,28,28,28,]),'VAR':([15,16,17,18,19,20,30,31,35,45,46,47,48,49,50,54,55,56,57,58,],[33,40,33,33,43,33,33,33,33,33,33,33,33,33,33,33,33,68,33,33,]),'LPAREN':([15,17,18,20,30,31,35,37,38,45,46,47,48,49,50,54,55,57,58,],[35,35,35,35,35,35,35,54,55,35,35,35,35,35,35,35,35,35,35,]),'PLUS':([15,17,18,20,27,29,30,31,32,33,34,35,36,41,42,44,45,46,47,48,49,50,51,52,53,54,55,57,58,61,62,63,64,65,69,70,71,72,],[30,30,30,30,47,-29,30,30,-32,-35,-36,30,-40,47,47,47,30,30,30,30,30,30,-38,-39,47,30,30,30,30,-30,-31,-33,-34,-37,47,47,-41,-42,]),'MINUS':([15,17,18,20,27,29,30,31,32,33,34,35,36,41,42,44,45,46,47,48,49,50,51,52,53,54,55,57,58,61,62,63,64,65,69,70,71,72,],[31,31,31,31,48,-29,31,31,-32,-35,-36,31,-40,48,48,48,31,31,31,31,31,31,-38,-39,48,31,31,31,31,-30,-31,-33,-34,-37,48,48,-41,-42,]),'RND':([15,17,18,20,30,31,35,45,46,47,48,49,50,54,55,57,58,],[37,37,37,37,37,37,37,37,37,37,37,37,37,37,37,37,37,]),'USR':([15,17,18,20,30,31,35,45,46,47,48,49,50,54,55,57,58,],[38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,]),'COMMA':([25,26,27,28,29,32,33,34,36,39,40,51,52,59,60,61,62,63,64,65,66,67,68,71,72,],[45,-22,-25,-26,-29,-32,-35,-36,-40,56,-27,-38,-39,-23,-24,-30,-31,-33,-34,-37,45,45,-28,-41,-42,]),'SEMICOLON':([25,26,27,28,29,32,33,34,36,51,52,59,60,61,62,63,64,65,66,67,71,72,],[46,-22,-25,-26,-29,-32,-35,-36,-40,-38,-39,-23,-24,-30,-31,-33,-34,-37,46,46,-41,-42,]),'RPAREN':([26,27,28,29,32,33,34,36,51,52,53,59,60,61,62,63,64,65,66,67,71,72,],[-22,-25,-26,-29,-32,-35,-36,-40,-38,-39,65,-23,-24,-30,-31,-33,-34,-37,71,72,-41,-42,]),'RELOP':([29,32,33,34,36,41,51,52,61,62,63,64,65,71,72,],[-29,-32,-35,-36,-40,57,-38,-39,-30,-31,-33,-34,-37,-41,-42,]),'THEN':([29,32,33,34,36,51,52,61,62,63,64,65,69,71,72,],[-29,-32,-35,-36,-40,-38,-39,-30,-31,-33,-34,-37,73,-41,-42,]),'TIMES':([29,32,33,34,36,51,52,61,62,63,64,65,71,72,],[49,-32,-35,-36,-40,-38,-39,49,49,-33,-34,-37,-41,-42,]),'DIVIDE':([29,32,33,34,36,51,52,61,62,63,64,65,71,72,],[50,-32,-35,-36,-40,-38,-39,50,50,-33,-34,-37,-41,-42,]),'EQUALS':([43,],[58,]),}
+_lr_action_items = {'NUMBER':([0,1,2,4,15,17,18,20,24,30,31,35,45,46,47,48,49,50,54,55,57,58,59,],[3,3,-1,-2,34,34,34,34,-3,34,34,34,34,34,34,34,34,34,34,34,34,34,34,]),'$end':([1,2,4,24,],[0,-1,-2,-3,]),'PRINT':([3,75,76,],[15,15,15,]),'INPUT':([3,75,76,],[16,16,16,]),'IF':([3,75,76,],[17,17,17,]),'GOTO':([3,75,76,],[18,18,18,]),'LET':([3,75,76,],[19,19,19,]),'GOSUB':([3,75,76,],[20,20,20,]),'REM':([3,75,76,],[21,21,21,]),'RETURN':([3,75,76,],[22,22,22,]),'END':([3,75,76,],[23,23,23,]),'NEWLINE':([5,6,7,8,9,10,11,12,13,14,21,22,23,25,26,27,28,29,32,33,34,36,39,40,42,44,51,52,60,61,62,63,64,65,66,69,72,73,74,77,78,],[24,-4,-5,-6,-7,-8,-9,-10,-11,-12,-20,-21,-22,-13,-23,-26,-27,-30,-33,-36,-37,-41,-14,-28,-17,-19,-39,-40,-24,-25,-31,-32,-34,-35,-38,-29,-18,-42,-43,-15,-16,]),'STRING':([15,45,46,54,55,],[28,28,28,28,28,]),'VAR':([15,16,17,18,19,20,30,31,35,45,46,47,48,49,50,54,55,56,57,58,59,],[33,40,33,33,43,33,33,33,33,33,33,33,33,33,33,33,33,69,33,33,33,]),'LPAREN':([15,17,18,20,30,31,35,37,38,45,46,47,48,49,50,54,55,57,58,59,],[35,35,35,35,35,35,35,54,55,35,35,35,35,35,35,35,35,35,35,35,]),'PLUS':([15,17,18,20,27,29,30,31,32,33,34,35,36,41,42,44,45,46,47,48,49,50,51,52,53,54,55,57,58,59,62,63,64,65,66,70,71,72,73,74,],[30,30,30,30,47,-30,30,30,-33,-36,-37,30,-41,47,47,47,30,30,30,30,30,30,-39,-40,47,30,30,30,30,30,-31,-32,-34,-35,-38,47,47,47,-42,-43,]),'MINUS':([15,17,18,20,27,29,30,31,32,33,34,35,36,41,42,44,45,46,47,48,49,50,51,52,53,54,55,57,58,59,62,63,64,65,66,70,71,72,73,74,],[31,31,31,31,48,-30,31,31,-33,-36,-37,31,-41,48,48,48,31,31,31,31,31,31,-39,-40,48,31,31,31,31,31,-31,-32,-34,-35,-38,48,48,48,-42,-43,]),'RND':([15,17,18,20,30,31,35,45,46,47,48,49,50,54,55,57,58,59,],[37,37,37,37,37,37,37,37,37,37,37,37,37,37,37,37,37,37,]),'USR':([15,17,18,20,30,31,35,45,46,47,48,49,50,54,55,57,58,59,],[38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,]),'COMMA':([25,26,27,28,29,32,33,34,36,39,40,51,52,60,61,62,63,64,65,66,67,68,69,73,74,],[45,-23,-26,-27,-30,-33,-36,-37,-41,56,-28,-39,-40,-24,-25,-31,-32,-34,-35,-38,45,45,-29,-42,-43,]),'SEMICOLON':([25,26,27,28,29,32,33,34,36,51,52,60,61,62,63,64,65,66,67,68,73,74,],[46,-23,-26,-27,-30,-33,-36,-37,-41,-39,-40,-24,-25,-31,-32,-34,-35,-38,46,46,-42,-43,]),'RPAREN':([26,27,28,29,32,33,34,36,51,52,53,60,61,62,63,64,65,66,67,68,73,74,],[-23,-26,-27,-30,-33,-36,-37,-41,-39,-40,66,-24,-25,-31,-32,-34,-35,-38,73,74,-42,-43,]),'RELOP':([29,32,33,34,36,41,51,52,62,63,64,65,66,73,74,],[-30,-33,-36,-37,-41,57,-39,-40,-31,-32,-34,-35,-38,-42,-43,]),'EQUALS':([29,32,33,34,36,41,43,51,52,62,63,64,65,66,73,74,],[-30,-33,-36,-37,-41,58,59,-39,-40,-31,-32,-34,-35,-38,-42,-43,]),'THEN':([29,32,33,34,36,51,52,62,63,64,65,66,70,71,73,74,],[-30,-33,-36,-37,-41,-39,-40,-31,-32,-34,-35,-38,75,76,-42,-43,]),'TIMES':([29,32,33,34,36,51,52,62,63,64,65,66,73,74,],[49,-33,-36,-37,-41,-39,-40,49,49,-34,-35,-38,-42,-43,]),'DIVIDE':([29,32,33,34,36,51,52,62,63,64,65,66,73,74,],[50,-33,-36,-37,-41,-39,-40,50,50,-34,-35,-38,-42,-43,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'actual_statement':([0,1,],[2,4,]),'statement':([3,73,],[5,74,]),'print_statement':([3,73,],[6,6,]),'input_statement':([3,73,],[7,7,]),'if_statement':([3,73,],[8,8,]),'goto_statement':([3,73,],[9,9,]),'let_statement':([3,73,],[10,10,]),'gosub_statement':([3,73,],[11,11,]),'rem_statement':([3,73,],[12,12,]),'return_statement':([3,73,],[13,13,]),'end_statement':([3,73,],[14,14,]),'expr_list':([15,54,55,],[25,66,67,]),'expr_list_item':([15,45,46,54,55,],[26,59,60,26,26,]),'expression':([15,17,18,20,35,45,46,54,55,57,58,],[27,41,42,44,53,27,27,27,27,69,70,]),'term':([15,17,18,20,35,45,46,47,48,54,55,57,58,],[29,29,29,29,29,29,29,61,62,29,29,29,29,]),'factor':([15,17,18,20,30,31,35,45,46,47,48,49,50,54,55,57,58,],[32,32,32,32,51,52,32,32,32,32,32,63,64,32,32,32,32,]),'function':([15,17,18,20,30,31,35,45,46,47,48,49,50,54,55,57,58,],[36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,]),'var_list':([16,],[39,]),}
+_lr_goto_items = {'program':([0,],[1,]),'actual_statement':([0,1,],[2,4,]),'statement':([3,75,76,],[5,77,78,]),'print_statement':([3,75,76,],[6,6,6,]),'input_statement':([3,75,76,],[7,7,7,]),'if_statement':([3,75,76,],[8,8,8,]),'goto_statement':([3,75,76,],[9,9,9,]),'let_statement':([3,75,76,],[10,10,10,]),'gosub_statement':([3,75,76,],[11,11,11,]),'rem_statement':([3,75,76,],[12,12,12,]),'return_statement':([3,75,76,],[13,13,13,]),'end_statement':([3,75,76,],[14,14,14,]),'expr_list':([15,54,55,],[25,67,68,]),'expr_list_item':([15,45,46,54,55,],[26,60,61,26,26,]),'expression':([15,17,18,20,35,45,46,54,55,57,58,59,],[27,41,42,44,53,27,27,27,27,70,71,72,]),'term':([15,17,18,20,35,45,46,47,48,54,55,57,58,59,],[29,29,29,29,29,29,29,62,63,29,29,29,29,29,]),'factor':([15,17,18,20,30,31,35,45,46,47,48,49,50,54,55,57,58,59,],[32,32,32,32,51,52,32,32,32,32,32,64,65,32,32,32,32,32,]),'function':([15,17,18,20,30,31,35,45,46,47,48,49,50,54,55,57,58,59,],[36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,]),'var_list':([16,],[39,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,46 +27,47 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> actual_statement','program',1,'p_program','interpreter.py',86),
-  ('program -> program actual_statement','program',2,'p_program','interpreter.py',87),
-  ('actual_statement -> NUMBER statement NEWLINE','actual_statement',3,'p_actual_statement','interpreter.py',94),
-  ('statement -> print_statement','statement',1,'p_statement','interpreter.py',98),
-  ('statement -> input_statement','statement',1,'p_statement','interpreter.py',99),
-  ('statement -> if_statement','statement',1,'p_statement','interpreter.py',100),
-  ('statement -> goto_statement','statement',1,'p_statement','interpreter.py',101),
-  ('statement -> let_statement','statement',1,'p_statement','interpreter.py',102),
-  ('statement -> gosub_statement','statement',1,'p_statement','interpreter.py',103),
-  ('statement -> rem_statement','statement',1,'p_statement','interpreter.py',104),
-  ('statement -> return_statement','statement',1,'p_statement','interpreter.py',105),
-  ('statement -> end_statement','statement',1,'p_statement','interpreter.py',106),
-  ('print_statement -> PRINT expr_list','print_statement',2,'p_print_statement','interpreter.py',110),
-  ('input_statement -> INPUT var_list','input_statement',2,'p_input_statement','interpreter.py',114),
-  ('if_statement -> IF expression RELOP expression THEN statement','if_statement',6,'p_if_statement','interpreter.py',118),
-  ('goto_statement -> GOTO expression','goto_statement',2,'p_goto_statement','interpreter.py',122),
-  ('let_statement -> LET VAR EQUALS expression','let_statement',4,'p_let_statement','interpreter.py',126),
-  ('gosub_statement -> GOSUB expression','gosub_statement',2,'p_gosub_statement','interpreter.py',130),
-  ('rem_statement -> REM','rem_statement',1,'p_rem_statement','interpreter.py',134),
-  ('return_statement -> RETURN','return_statement',1,'p_return_statement','interpreter.py',138),
-  ('end_statement -> END','end_statement',1,'p_end_statement','interpreter.py',142),
-  ('expr_list -> expr_list_item','expr_list',1,'p_expr_list','interpreter.py',146),
-  ('expr_list -> expr_list COMMA expr_list_item','expr_list',3,'p_expr_list','interpreter.py',147),
-  ('expr_list -> expr_list SEMICOLON expr_list_item','expr_list',3,'p_expr_list','interpreter.py',148),
-  ('expr_list_item -> expression','expr_list_item',1,'p_expr_list_item','interpreter.py',158),
-  ('expr_list_item -> STRING','expr_list_item',1,'p_expr_list_item','interpreter.py',159),
-  ('var_list -> VAR','var_list',1,'p_var_list','interpreter.py',163),
-  ('var_list -> var_list COMMA VAR','var_list',3,'p_var_list','interpreter.py',164),
-  ('expression -> term','expression',1,'p_expression','interpreter.py',171),
-  ('expression -> expression PLUS term','expression',3,'p_expression','interpreter.py',172),
-  ('expression -> expression MINUS term','expression',3,'p_expression','interpreter.py',173),
-  ('term -> factor','term',1,'p_term','interpreter.py',180),
-  ('term -> term TIMES factor','term',3,'p_term','interpreter.py',181),
-  ('term -> term DIVIDE factor','term',3,'p_term','interpreter.py',182),
-  ('factor -> VAR','factor',1,'p_factor','interpreter.py',190),
-  ('factor -> NUMBER','factor',1,'p_factor','interpreter.py',191),
-  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor','interpreter.py',192),
-  ('factor -> PLUS factor','factor',2,'p_factor','interpreter.py',193),
-  ('factor -> MINUS factor','factor',2,'p_factor','interpreter.py',194),
-  ('factor -> function','factor',1,'p_factor','interpreter.py',195),
-  ('function -> RND LPAREN expr_list RPAREN','function',4,'p_function','interpreter.py',209),
-  ('function -> USR LPAREN expr_list RPAREN','function',4,'p_function','interpreter.py',210),
+  ('program -> actual_statement','program',1,'p_program','interpreter.py',78),
+  ('program -> program actual_statement','program',2,'p_program','interpreter.py',79),
+  ('actual_statement -> NUMBER statement NEWLINE','actual_statement',3,'p_actual_statement','interpreter.py',86),
+  ('statement -> print_statement','statement',1,'p_statement','interpreter.py',90),
+  ('statement -> input_statement','statement',1,'p_statement','interpreter.py',91),
+  ('statement -> if_statement','statement',1,'p_statement','interpreter.py',92),
+  ('statement -> goto_statement','statement',1,'p_statement','interpreter.py',93),
+  ('statement -> let_statement','statement',1,'p_statement','interpreter.py',94),
+  ('statement -> gosub_statement','statement',1,'p_statement','interpreter.py',95),
+  ('statement -> rem_statement','statement',1,'p_statement','interpreter.py',96),
+  ('statement -> return_statement','statement',1,'p_statement','interpreter.py',97),
+  ('statement -> end_statement','statement',1,'p_statement','interpreter.py',98),
+  ('print_statement -> PRINT expr_list','print_statement',2,'p_print_statement','interpreter.py',102),
+  ('input_statement -> INPUT var_list','input_statement',2,'p_input_statement','interpreter.py',106),
+  ('if_statement -> IF expression RELOP expression THEN statement','if_statement',6,'p_if_statement','interpreter.py',110),
+  ('if_statement -> IF expression EQUALS expression THEN statement','if_statement',6,'p_if_statement','interpreter.py',111),
+  ('goto_statement -> GOTO expression','goto_statement',2,'p_goto_statement','interpreter.py',115),
+  ('let_statement -> LET VAR EQUALS expression','let_statement',4,'p_let_statement','interpreter.py',119),
+  ('gosub_statement -> GOSUB expression','gosub_statement',2,'p_gosub_statement','interpreter.py',123),
+  ('rem_statement -> REM','rem_statement',1,'p_rem_statement','interpreter.py',127),
+  ('return_statement -> RETURN','return_statement',1,'p_return_statement','interpreter.py',131),
+  ('end_statement -> END','end_statement',1,'p_end_statement','interpreter.py',135),
+  ('expr_list -> expr_list_item','expr_list',1,'p_expr_list','interpreter.py',139),
+  ('expr_list -> expr_list COMMA expr_list_item','expr_list',3,'p_expr_list','interpreter.py',140),
+  ('expr_list -> expr_list SEMICOLON expr_list_item','expr_list',3,'p_expr_list','interpreter.py',141),
+  ('expr_list_item -> expression','expr_list_item',1,'p_expr_list_item','interpreter.py',151),
+  ('expr_list_item -> STRING','expr_list_item',1,'p_expr_list_item','interpreter.py',152),
+  ('var_list -> VAR','var_list',1,'p_var_list','interpreter.py',156),
+  ('var_list -> var_list COMMA VAR','var_list',3,'p_var_list','interpreter.py',157),
+  ('expression -> term','expression',1,'p_expression','interpreter.py',164),
+  ('expression -> expression PLUS term','expression',3,'p_expression','interpreter.py',165),
+  ('expression -> expression MINUS term','expression',3,'p_expression','interpreter.py',166),
+  ('term -> factor','term',1,'p_term','interpreter.py',173),
+  ('term -> term TIMES factor','term',3,'p_term','interpreter.py',174),
+  ('term -> term DIVIDE factor','term',3,'p_term','interpreter.py',175),
+  ('factor -> VAR','factor',1,'p_factor','interpreter.py',183),
+  ('factor -> NUMBER','factor',1,'p_factor','interpreter.py',184),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor','interpreter.py',185),
+  ('factor -> PLUS factor','factor',2,'p_factor','interpreter.py',186),
+  ('factor -> MINUS factor','factor',2,'p_factor','interpreter.py',187),
+  ('factor -> function','factor',1,'p_factor','interpreter.py',188),
+  ('function -> RND LPAREN expr_list RPAREN','function',4,'p_function','interpreter.py',202),
+  ('function -> USR LPAREN expr_list RPAREN','function',4,'p_function','interpreter.py',203),
 ]
